@@ -55,8 +55,8 @@ CREATE TABLE areas_has_monsters
 --Create the bonfires table
  CREATE TABLE bonfires
 	( id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	  "name" varchar (45) UNIQUE NOT NULL,
-	  number int NOT NULL )
+	  "name" varchar (45) NOT NULL,
+	  number int UNIQUE NOT NULL )
 	  
 --Create the characters table
  CREATE TABLE characters
@@ -69,6 +69,17 @@ CREATE TABLE areas_has_monsters
 --Create the monsters table
  CREATE TABLE monsters
 	( id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	  "name" varchar (45) UNIQUE NOT NULL,
 	  "type" int NOT NULL,
-	  "name" varchar (45) UNIQUE NOT NULL,
+	  boss bit NOT NULL,
+	  "name" varchar (45) NOT NULL,
+	  health int NOT NULL,
+	  damage int NOT NULL )
+
+--Create the monsters table
+ CREATE TABLE monsters
+	( id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	  "type" int NOT NULL,
+	  boss bit NOT NULL,
+	  "name" varchar (45) NOT NULL,
+	  health int NOT NULL,
+	  damage int NOT NULL )
