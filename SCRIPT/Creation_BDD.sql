@@ -6,7 +6,7 @@
 -- Create the Database
 USE master ;
 drop database Darksouls
---GO 
+ 
 CREATE DATABASE Darksouls ON PRIMARY
 ( NAME = Dark_souls_dat,
     FILENAME = 'C:\Data\Cyprien_Jaquier\Darksouls_dat.mdf',
@@ -19,11 +19,9 @@ CREATE DATABASE Darksouls ON PRIMARY
     SIZE = 5MB,  
     MAXSIZE = 25MB,  
     FILEGROWTH = 5MB ) ;  
---GO 
-
 
  USE Darksouls;
--- drop table characters ;
+-- drop table accounts ;
 -- Create the accounts table
  CREATE TABLE accounts
 	( id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
@@ -31,18 +29,19 @@ CREATE DATABASE Darksouls ON PRIMARY
 	  mail varchar (70) NOT NULL,
 	  passwords varchar (45) NOT NULL )
 
+-- drop table areas
 -- Create the areas table
  CREATE TABLE areas
 	( id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	  "name" varchar (45) UNIQUE NOT NULL,
 	  bosses int,
 	  bonfires int,
-	  bonfires_id int NOT NULL )	-- FK
+	  bonfires_id int)	-- FK
 
 -- Create the monsters table
  CREATE TABLE monsters
 	( id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	  "type" int NOT NULL,
+	  "type" varchar (45) NOT NULL,
 	  boss bit NOT NULL,
 	  "name" varchar (45) NOT NULL,
 	  health int NOT NULL,
@@ -50,13 +49,13 @@ CREATE DATABASE Darksouls ON PRIMARY
 
 -- Create the areas_has_monsters table
 CREATE TABLE areas_has_monsters
-	( areas_id int NOT NULL,	-- FK
-	  monsters_id int NOT NULL )	-- FK
+	( areas_id int ,	-- FK
+	  monsters_id int )	-- FK
 
 -- Create the armors table
  CREATE TABLE armors
 	( id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	  "name" varchar (45) UNIQUE NOT NULL,
+	  "name" varchar (45) NOT NULL,
 	  vigor int NOT NULL,
 	  resistance int NOT NULL )
 
@@ -70,16 +69,16 @@ CREATE TABLE areas_has_monsters
  CREATE TABLE characters
 	( id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	  "name" varchar (45) UNIQUE NOT NULL,
-	  accounts_id int NOT NULL,							-- FK
-	  statistics_id int NOT NULL,						-- FK
-	  progressions_id int NOT NULL,)						-- FK
+	  accounts_id int ,							-- FK
+	  statistics_id int ,						-- FK
+	  progressions_id int )						-- FK
 
 -- Create the progressions table
  CREATE TABLE progressions
 	( id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	  nbBonfire int,
 	  nbBoss int,
-	  bonfire_id int NOT NULL )							-- FK
+	  bonfire_id int )							-- FK
 	  
 -- Create the statistics table
  CREATE TABLE "statistics"
@@ -89,8 +88,8 @@ CREATE TABLE areas_has_monsters
 
 -- Create the statistics_has_armors table
 CREATE TABLE statistics_has_armors
-	( statistics_id int NOT NULL,			-- FK
-	  armors_id int NOT NULL )				-- FK
+	( statistics_id int ,			-- FK
+	  armors_id int )				-- FK
 
 	  -- Create the armors table
  CREATE TABLE weapons
@@ -102,10 +101,8 @@ CREATE TABLE statistics_has_armors
 
 -- Create the statistics_has_weapons table
 CREATE TABLE statistics_has_weapons
-	( statistics_id int NOT NULL,			-- FK
-	  weapons_id int NOT NULL )				-- FK
-
-GO
+	( statistics_id int ,			-- FK
+	  weapons_id int )				-- FK
 
  USE Darksouls;
 
@@ -127,4 +124,4 @@ REFERENCES "statistics"(id)
 ALTER TABLE characters WITH CHECK ADD  CONSTRAINT FK_Darksouls_progressions FOREIGN KEY(progressions_id)
 REFERENCES progressions(id)
 
-USE master ;
+USE Master ;
