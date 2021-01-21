@@ -1,4 +1,4 @@
-/*Author : Cyprien Jaquier
+/*Author : Cyprien Jaquier, Loik Meylan
   Date   : 08/01/2021
   Project: Darksouls
 */
@@ -35,8 +35,7 @@ CREATE DATABASE Darksouls ON PRIMARY
 	( id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	  "name" varchar (45) UNIQUE NOT NULL,
 	  bosses int,
-	  bonfires int,
-	  bonfires_id int)	-- FK
+	  bonfires int )
 
 -- Create the monsters table
  CREATE TABLE monsters
@@ -48,7 +47,7 @@ CREATE DATABASE Darksouls ON PRIMARY
 	  damage int NOT NULL )
 
 -- Create the areas_has_monsters table
-CREATE TABLE areas_has_monsters
+CREATE TABLE areas_live_monsters
 	( areas_id int ,	-- FK
 	  monsters_id int )	-- FK
 
@@ -63,7 +62,8 @@ CREATE TABLE areas_has_monsters
  CREATE TABLE bonfires
 	( id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	  "name" varchar (45) NOT NULL,
-	  number int UNIQUE NOT NULL )
+	  U_number int UNIQUE NOT NULL,
+	  areas_id int )
 	  
 -- Create the characters table
  CREATE TABLE characters
@@ -87,7 +87,7 @@ CREATE TABLE areas_has_monsters
 	  "value" int)
 
 -- Create the statistics_has_armors table
-CREATE TABLE statistics_has_armors
+CREATE TABLE armors_need_statistics
 	( statistics_id int ,			-- FK
 	  armors_id int )				-- FK
 
@@ -100,25 +100,37 @@ CREATE TABLE statistics_has_armors
 	  damage int NOT NULL )
 
 -- Create the statistics_has_weapons table
-CREATE TABLE statistics_has_weapons
+CREATE TABLE weapons_need_statistics
 	( statistics_id int ,			-- FK
 	  weapons_id int )				-- FK
 
  USE Darksouls;
 
-ALTER TABLE areas WITH CHECK ADD  CONSTRAINT FK_Darksouls_bonfires FOREIGN KEY(bonfires_id)
-REFERENCES bonfires(id)
-
-ALTER TABLE areas_has_monsters WITH CHECK ADD  CONSTRAINT FK_Darksouls_areas FOREIGN KEY(areas_id)
+ALTER TABLE bonfires WITH CHECK ADD  CONSTRAINT FK_Darksouls_areas FOREIGN KEY(areas_id)
 REFERENCES areas(id)
 
-ALTER TABLE areas_has_monsters WITH CHECK ADD  CONSTRAINT FK_Darksouls_monsters FOREIGN KEY(monsters_id)
+ALTER TABLE areas_live_monsters WITH CHECK ADD  CONSTRAINT FK_Darksouls_monsters FOREIGN KEY(monsters_id)
 REFERENCES monsters(id)
+
+ALTER TABLE areas_live_monsters WITH CHECK ADD  CONSTRAINT FK_Darksouls_area FOREIGN KEY(areas_id)
+REFERENCES areas(id)
+
+ALTER TABLE armors_need_statistics WITH CHECK ADD  CONSTRAINT FK_Darksouls_statistics FOREIGN KEY(statistics_id)
+REFERENCES "statistics"(id)
+
+ALTER TABLE armors_need_statistics WITH CHECK ADD  CONSTRAINT FK_Darksouls_armors FOREIGN KEY(armors_id)
+REFERENCES armors(id)
+
+ALTER TABLE weapons_need_statistics WITH CHECK ADD  CONSTRAINT FK_Darksouls_weapons FOREIGN KEY(weapons_id)
+REFERENCES  weapons(id)
+
+ALTER TABLE weapons_need_statistics WITH CHECK ADD  CONSTRAINT FK_Darksouls_statistic FOREIGN KEY(statistics_id)
+REFERENCES "statistics"(id)
 
 ALTER TABLE characters WITH CHECK ADD  CONSTRAINT FK_Darksouls_accounts FOREIGN KEY(accounts_id)
 REFERENCES accounts(id)
 
-ALTER TABLE characters WITH CHECK ADD  CONSTRAINT FK_Darksouls_statistics FOREIGN KEY(statistics_id)
+ALTER TABLE characters WITH CHECK ADD  CONSTRAINT FK_Darksouls_statisticss FOREIGN KEY(statistics_id)
 REFERENCES "statistics"(id)
 
 ALTER TABLE characters WITH CHECK ADD  CONSTRAINT FK_Darksouls_progressions FOREIGN KEY(progressions_id)
