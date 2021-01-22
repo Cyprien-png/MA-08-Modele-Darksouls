@@ -5,7 +5,7 @@
 USE Darksouls ;
 GO
 
--- Requête SQL
+-- Requests for tables
 SELECT * FROM accounts;
 SELECT * FROM characters;
 SELECT * FROM progressions;
@@ -19,7 +19,7 @@ SELECT * FROM armors;
 SELECT * FROM weapons_need_statistics;
 SELECT * FROM weapons;
 
--- Pour les Vues
+-- Requests for views
 SELECT * FROM V_accounts;
 SELECT * FROM V_areas;
 SELECT * FROM V_areas_live_monsters;
