@@ -36,7 +36,7 @@ CREATE DATABASE Darksouls;
 	  damage int NOT NULL )
 
 -- Create the areas_has_monsters table
-CREATE TABLE areas_live_monsters
+CREATE TABLE monsters_live_areas
 	( areas_id int ,	-- FK
 	  monsters_id int )	-- FK
 
@@ -95,13 +95,14 @@ CREATE TABLE weapons_need_statistics
 
  USE Darksouls;
 
+ -- Constraints FK
 ALTER TABLE bonfires WITH CHECK ADD  CONSTRAINT FK_Darksouls_areas FOREIGN KEY(areas_id)
 REFERENCES areas(id)
 
-ALTER TABLE areas_live_monsters WITH CHECK ADD  CONSTRAINT FK_Darksouls_monsters FOREIGN KEY(monsters_id)
+ALTER TABLE monsters_live_areas WITH CHECK ADD  CONSTRAINT FK_Darksouls_monsters FOREIGN KEY(monsters_id)
 REFERENCES monsters(id)
 
-ALTER TABLE areas_live_monsters WITH CHECK ADD  CONSTRAINT FK_Darksouls_area FOREIGN KEY(areas_id)
+ALTER TABLE monsters_live_areas WITH CHECK ADD  CONSTRAINT FK_Darksouls_area FOREIGN KEY(areas_id)
 REFERENCES areas(id)
 
 ALTER TABLE armors_need_statistics WITH CHECK ADD  CONSTRAINT FK_Darksouls_statistics FOREIGN KEY(statistics_id)

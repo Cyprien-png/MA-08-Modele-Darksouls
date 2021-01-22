@@ -11,7 +11,7 @@ SELECT * FROM characters;
 SELECT * FROM progressions;
 SELECT * FROM bonfires;
 SELECT * FROM areas;
-SELECT * FROM areas_live_monsters;
+SELECT * FROM monsters_live_areas;
 SELECT * FROM monsters;
 SELECT * FROM "statistics";
 SELECT * FROM armors_need_statistics;
@@ -22,7 +22,7 @@ SELECT * FROM weapons;
 -- Requests for views
 SELECT * FROM V_accounts;
 SELECT * FROM V_areas;
-SELECT * FROM V_areas_live_monsters;
+SELECT * FROM V_monsters_live_areas;
 SELECT * FROM V_armors;
 SELECT * FROM V_armors_need_statistics;
 SELECT * FROM V_bonfires;
