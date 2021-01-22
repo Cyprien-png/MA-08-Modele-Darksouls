@@ -7,18 +7,7 @@
 USE master ;
 drop database Darksouls
  
-CREATE DATABASE Darksouls ON PRIMARY
-( NAME = Dark_souls_dat,
-    FILENAME = 'C:\Data\Cyprien_Jaquier\Darksouls_dat.mdf',
-    SIZE = 10MB,
-    MAXSIZE = 50MB,
-    FILEGROWTH = 10MB )
-    LOG ON  
-( NAME =  Dark_souls_log,  
-    FILENAME = 'C:\Data\Cyprien_Jaquier\Darksouls_log.ldf',  
-    SIZE = 5MB,  
-    MAXSIZE = 25MB,  
-    FILEGROWTH = 5MB ) ;  
+CREATE DATABASE Darksouls;
 
  USE Darksouls;
 -- drop table accounts ;
