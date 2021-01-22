@@ -4,5 +4,6 @@
 */
 USE Darksouls ;
 GO
-CREATE VIEW V_dataCount
-	AS SELECT * FROM accounts;
+	CREATE VIEW V_accounts
+	 AS "accounts" SELECT COUNT(*)
+	FROM accounts
