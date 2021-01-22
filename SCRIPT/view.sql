@@ -4,8 +4,7 @@
 */
 USE Darksouls ;
 GO
--- drop VIEW V_accounts;
-
+-- Create the views
 
 	CREATE VIEW [dbo].[V_accounts]
 AS
